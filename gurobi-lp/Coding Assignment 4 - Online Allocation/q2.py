@@ -11,24 +11,32 @@ def q2():
     m = Model('Dual')
 
     # Your code goes here
- 
+    N = len(c)    
+    
     # The following example is here to help you build the model (you must adapt it !!!) 
     # Define decision variables
     lamb = []
-    for i in range(N):
+    for i in range(len(A)):
         lamb.append(m.addVar(lb = 0, vtype=GRB.CONTINUOUS, name = 'lamb_{}'.format(i), obj = 1))
     m.update()
 
     # Define constraints:
-    for i in range(len(x)):
-        m.addConstr(y[i] - z[i] , "<=" , rhs=0)  
+    for i in range(len(c)):
+        lhs = LinExpr()
+        for j in range(len(A)):
+            expr.add(lamb[j], A[j][i])
+        m.addConstr(lhs, ">=" , rhs=c[i])  
         m.update()
  
     # Define objective function:
+    objexpr = LinExpr()
+    for i in range(len(b)):
+        objexpr.add(lamb[i], b[i])
     m.setObjective(objexpr, GRB.MINIMIZE)
- 
     m.update()
+    
+    m.optimize()
  
-    # z = optimal objective value (float)
-    # lamb = coefficient for each covariate, starting with the covariates associated with the capacity constraints (list or numpy array)
-    return([z, lamb])
+    z = m.objVal
+    lamb = [v.x for v in lamb[:4]]
+    return ([z, lamb])
