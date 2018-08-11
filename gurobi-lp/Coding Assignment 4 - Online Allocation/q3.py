@@ -14,6 +14,6 @@ def q3():
         for j in range(4):
             p -= lamda[j]*A[i, j]
         if p < 0:
-            reject_list.append(i)
+            reject_list.append(i+1)
     
     return(reject_list)
