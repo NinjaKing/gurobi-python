@@ -1,6 +1,5 @@
 def q3():
     import pandas as pd
-    import numpy
     from q2 import q2
     
     optimal = q2()

@@ -1,5 +1,5 @@
 def compute_optimal_allocation():
-    from gurobipy import GRB, Model, quicksum
+    from gurobipy import GRB, Model, quicksum, LinExpr
     import numpy
     from construct_lp_model import construct_lp_model
  
@@ -27,24 +27,21 @@ def compute_optimal_allocation():
         for j in range(n_servers):
             x_i.append(m.addVar(vtype=GRB.BINARY, name = 'var_{}_{}'.format(i, j)))
         x.append(x_i)
-    m.update()
 
     # Define constraints:
     # each job only assigned to 1 server
     for i in range(n_jobs):
         lhs = LinExpr()
         for j in range(n_servers):
-            expr.add(x[i][j], 1)
+            lhs.add(x[i][j], 1)
         m.addConstr(lhs, GRB.EQUAL, rhs=1)  
-    m.update()
     
     # each server can do at most 2 jobs
     for j in range(n_servers):
         lhs = LinExpr()
         for i in range(n_jobs):
-            expr.add(x[i][j], 1)
+            lhs.add(x[i][j], 1)
         m.addConstr(lhs, '<=', rhs=2)  
-    m.update()
  
     # Define objective function:
     objexpr = LinExpr()
@@ -52,17 +49,18 @@ def compute_optimal_allocation():
         for j in range(n_servers):
             objexpr.add(x[i][j], cost[i, j])
     m.setObjective(objexpr, GRB.MINIMIZE)
-    m.update()
     
+    m.update()
+    m.write('matching.lp')
     m.optimize()
  
     total_cost = m.objVal
     optimal_allocation = []
     for i in range(n_jobs):
         for j in range(n_servers):
-            if x[i][j] == 1:
+            if x[i][j].x == 1:
                 optimal_allocation.append((i + 1, j + 1))
-    model = v
+    model = m
 
     # Your code goes here
  

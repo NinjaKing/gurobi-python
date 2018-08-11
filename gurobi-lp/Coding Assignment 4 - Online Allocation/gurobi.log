@@ -1,0 +1,42 @@
+
+Gurobi 7.5.2 (win64, Python) logging started 08/12/18 01:43:25
+
+Academic license - for non-commercial use only
+
+Gurobi 7.5.2 (win64, Python) logging started 08/12/18 01:44:24
+
+Academic license - for non-commercial use only
+
+Gurobi 7.5.2 (win64, Python) logging started 08/12/18 01:45:08
+
+Academic license - for non-commercial use only
+Optimize a model with 100 rows, 104 columns and 438 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 6e+00]
+  Objective range  [1e+00, 1e+02]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 2e+01]
+Presolve time: 0.02s
+Presolved: 100 rows, 104 columns, 438 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   2.478750e+02   0.000000e+00      0s
+      68    6.0300000e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 68 iterations and 0.03 seconds
+Optimal objective  6.030000000e+02
+Optimize a model with 100 rows, 104 columns and 438 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 6e+00]
+  Objective range  [1e+00, 1e+02]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 2e+01]
+Presolve time: 0.01s
+Presolved: 100 rows, 104 columns, 438 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   2.478750e+02   0.000000e+00      0s
+      68    6.0300000e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 68 iterations and 0.02 seconds
+Optimal objective  6.030000000e+02

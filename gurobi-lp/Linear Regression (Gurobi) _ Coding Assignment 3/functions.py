@@ -19,7 +19,7 @@ def open_data(file = 'data.txt'):
     return(x, y)
 
 ################ Function to construct an LP Model ##################
-def construct_lp_model(c, A, d):	
+def construct_lp_model(c, A, d):
     from gurobipy import Model, LinExpr, GRB
 
     # A = numpy.array (matrix)
@@ -40,7 +40,7 @@ def construct_lp_model(c, A, d):
     objExpr = LinExpr()
     for i in range(n):
         objExpr.add(x[i], c[i])
-        m.setObjective(objExpr, GRB.MAXIMIZE)
+    m.setObjective(objExpr, GRB.MAXIMIZE)
 
     # Constraints 
     expr={}
@@ -48,7 +48,7 @@ def construct_lp_model(c, A, d):
         expr = LinExpr()
         for i in range(n):
             expr.add(x[i], A[j, i])
-            m.addConstr(expr, GRB.LESS_EQUAL, d[j])
+        m.addConstr(expr, GRB.LESS_EQUAL, d[j])
 
     # Update the model to add new entries
     m.update()
